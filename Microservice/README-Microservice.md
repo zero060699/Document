@@ -55,6 +55,7 @@
    gọi lẫn nhau và chúng ta cần có các giải pháp để giảm lưu lượng mạng xuống mà vẫn đáp ứng được yêu cầu dữ liệu.
    
    **Dùng Service Mesh**
+   
    **Dùng RESTful**
 
     ![Screenshot](../images/restful.png)
@@ -89,4 +90,5 @@
      6. Ngoài ra, nó cũng hay được biết đến với pattern: Publish / Subscribe
 
    **Dùng gRPC**
+   
    **Mixed - Kết hợp**
