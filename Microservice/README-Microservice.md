@@ -3,7 +3,7 @@
    Microservice là 1 kiểu kiến trúc phần mềm. Các module trong phần mềm được chia thành các service nhỏ.
    Mỗi service đều có 1 logic riêng và có thể được deploy riêng biệt
 
-   ![Screenshot](images/microservice.png)
+   ![Screenshot](../images/microservices-architecture.png)
 
 2. ### Đặc điểm của microservice?
 
@@ -43,6 +43,7 @@
       5. Cải thiện khả năng bảo trì
       6. Dễ dàng hơn trong việc tích hợp 3rd-party
       7. Mỗi service có dung lượng lưu trữ riêng và có thể có cơ sở dữ liệu riêng.
+
     **Nhược điểm**
       1. Có thể tốc độ không cao bằng monolith, vấn đề về bảo mật, transaction, lỗi kết nối, quản lý log files.
       2. Mỗi service sử dụng một database riêng, việc đảm bảo tính đồng nhất trong dữ liệu sẽ trở nên phức tạp
