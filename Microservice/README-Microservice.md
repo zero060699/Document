@@ -49,3 +49,44 @@
       2. Mỗi service sử dụng một database riêng, việc đảm bảo tính đồng nhất trong dữ liệu sẽ trở nên phức tạp
       3. Sử dụng nhiều service nên việc theo dõi, quản lý các service này sẽ phức tạp hơn.
       4. Software Architect để phân tách module, Techinical Leader để setup workflow, IT/DevOps để setup CI/CD , deploy lên cloud….
+
+5. ### Vấn đề trao đổi dữ liệu giữa các service trong microservice
+   Việc sinh ra rất nhiều các service con trong một hệ thống khiến lưu lượng mạng sẽ tăng lên gấp nhiều lần khi các service sẽ cần
+   gọi lẫn nhau và chúng ta cần có các giải pháp để giảm lưu lượng mạng xuống mà vẫn đáp ứng được yêu cầu dữ liệu.
+   
+   **Dùng Service Mesh**
+   **Dùng RESTful**
+
+    ![Screenshot](../images/restful.png)
+
+     1. Về REST thì bản chất vẫn là HTTP + JSON payload.
+     2. Mỗi service sẽ có bộ API của riêng nó
+     3. Một service gửi HTTP request đi và chờ HTTP response trở về
+     4. Hình thức communication này còn được gọi là => Synchronous communication, tức thằng gửi request đi phải chờ
+     có phản hồi thì mới xử lý tiếp.
+     5. Hình thức communication này thì đơn giản và dễ dàng triển khai.
+   
+   **Dùng GraphQL**
+    
+    ![Screenshot](../images/graphql.png)
+
+     Tương tự như REST, GraphQL bản chất vẫn là HTTP + JSON. Tuy nhiên một chút điểm khác biết đó là client:
+     1. Chỉ sử dụng POST method
+     2. Client + Server đều dùng chung một Schema về resource - được quy định từ trước khi code
+     3. Trả về đúng các thông tin về resource được yêu cầu, không thừa, không thiếu một field nào
+     4. Single endpoint: Client chỉ gửi request tới một endpoint URL duy nhất
+    
+   **Dùng Message broker**
+
+    ![Screenshot](../images/message_broke.png)
+
+     Một cách khác để communicate giữa các service đó là dùng giao thức Message Broker, rất hữu ích với các service implenment event bus (Event Driven architecture):
+     1. Trước tiên, các service (thường gọi là producer) sẽ gửi message đến một thành phần trung gian gọi là Broker, VD: Redis, RabbitMQ...
+     2. Sau đó, broker sẽ đưa message vào trong queue để chờ tới lượt
+     3. Khi tới lượt, message trong queue sẽ được gửi tới các subscriber (thường gọi là consumer) - chính là các service đầu cuối
+     4. Đây là một dạng Asynchronous communication
+     5. Trao đổi thông tin dưới dạng các message
+     6. Ngoài ra, nó cũng hay được biết đến với pattern: Publish / Subscribe
+
+   **Dùng gRPC**
+   **Mixed - Kết hợp**
